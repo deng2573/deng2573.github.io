@@ -1,0 +1,39 @@
+{
+  "simples": [
+    {
+      "id": 0,
+      "name": "Home",
+      "title": "主页",
+      "isFinish": true,
+      "desc": "仿知乎主页列表界面"
+    },
+    {
+      "id": 2,
+      "name": "My",
+      "title": "我的",
+      "isFinish": false,
+      "desc": "仿支付宝个人中心界面"
+    },
+    {
+      "id": 3,
+      "name": "Dynamic",
+      "title": "朋友圈",
+      "isFinish": false,
+      "desc": "仿微信朋友圈界面"
+    },
+    {
+      "id": 4,
+      "name": "Publish",
+      "title": "发布",
+      "isFinish": false,
+      "desc": "仿微博发布界面"
+    },
+    {
+      "id": 5,
+      "name": "Search",
+      "title": "搜索",
+      "isFinish": false,
+      "desc": "仿AppStore搜索界面"
+    }
+  ]
+}

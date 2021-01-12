@@ -1,0 +1,384 @@
+{
+  "widgets": [
+    {
+      "id": 0,
+      "name": "Container",
+      "title": "组合类容器组件",
+      "desc": "Container是最常用的组件之一，它是单容器类组件，即仅能包含一个子组件，用于装饰和定位子组件。",
+      "lever": 5.0,
+      "segments": [
+        {
+          "id": 0,
+          "name": "Container",
+          "title": "基本样式",
+          "explain": "【width】 :  宽   【int】 \n",
+          "code": "class BaseContainer extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) {\n    return Container(\n      alignment: Alignment.topLeft,\n      width: 200,\n      height: 200 * 0.618,\n      color: Colors.cyan.withAlpha(88),\n    );\n  }\n}\n\n",
+          "isOpen": false
+        },
+        {
+          "id": 1,
+          "name": "Container",
+          "title": "约束性",
+          "explain": "【constraints】 : 约束 \n【BoxConstraints】：会约束该区域的尺寸，不会小于指定的最小宽高，也不会大于指定的最大宽高。 \n",
+          "code": "class ContainerConstraints extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) {\n    return Container(\n      //容器\n      color: Colors.blue,\n      width: 200,\n      height: 200 * 0.618,\n      constraints: BoxConstraints(\n          minWidth: 80, maxWidth: 120,\n          minHeight: 20, maxHeight: 80),\n    );\n  }\n}\n\n",
+          "isOpen": false
+        },
+        {
+          "id": 2,
+          "name": "Container",
+          "title": "在区域中放入一个子组件",
+          "explain": " 【padding】 : 内边距   【EdgeInsetsGeometry】 \n 【margin】: 外边距   【EdgeInsetsGeometry】 \n 【child】: 子组件    【Widget】 \n",
+          "code": "class ContainerWithChild extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) {\n    return Container(\n      alignment: Alignment.bottomRight,\n      padding: EdgeInsets.all(20),\n      margin: EdgeInsets.all(10),\n      width: 200,\n      height: 200 * 0.618,\n      color: Colors.cyan.withAlpha(88),\n      child: Icon(Icons.android_outlined),\n    );\n  }\n}\n\n",
+          "isOpen": false
+        },
+        {
+          "id": 3,
+          "name": "Container",
+          "title": "子组件对齐定位",
+          "explain": " 【alignment】 : 对齐定位   【AlignmentGeometry】 \n",
+          "code": "class ContainerAlignment extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) {\n    return Container(\n      alignment: Alignment.bottomLeft,\n      width: 200,\n      height: 200 * 0.618,\n      color: Colors.cyan.withAlpha(88),\n      child: Icon(\n        Icons.android,\n        color: Colors.blue,\n      ),\n    );\n  }\n}\n\n",
+          "isOpen": false
+        },
+        {
+          "id": 4,
+          "name": "Container",
+          "title": "子组件装饰",
+          "explain": "【decoration】 : 装饰   【Decoration】 \n \"可装饰: 边线、圆弧、颜色、渐变色、阴影、图片等内容\" \n",
+          "code": "class ContainerDecoration extends StatelessWidget {\n\n  final String imgUrl = 'https://cdn.nlark.com/yuque/0/2020/png/124240/1588642144485-avatar/cc786ed8-16ff-47bb-a331-3e63f6a8ba06.png?x-oss-process=image%2Fresize%2Cm_fill%2Cw_56%2Ch_56%2Fformat%2Cpng';\n  final List<int> rainbow = [\n    0xffFF6347,\n    0xffFFA500,\n    0xffADFF2F,\n    0xffFF7F00,\n    0xff1E90FF,\n    0xffe6454a,\n    0xffff0000,\n  ];\n  final List<double> stops = [0.0, 1 / 6, 2 / 6, 3 / 6, 4 / 6, 5 / 6, 1.0];\n  @override\n  Widget build(BuildContext context) {\n\n    return Container(//容器\n      alignment: Alignment.centerLeft,\n      width: 250,\n      height: 250 * 0.618,\n      margin: EdgeInsets.all(20),\n      padding: EdgeInsets.all(20),\n      decoration: BoxDecoration(\n          // 添加图片\n          image: DecorationImage(image: ExactAssetImage('assets/images/basics/basics_arrow_down.png',),alignment: Alignment.centerRight,fit: BoxFit.fitHeight),\n          //添加边框\n          border: Border.all(color:Colors.cyanAccent,width:2,style: BorderStyle.solid),\n          //添加渐变色\n          gradient: LinearGradient(\n              stops: stops,\n              colors: rainbow.map((e) => Color(e)).toList()),\n          borderRadius: BorderRadius.only(\n            // 圆角\n              topLeft: Radius.circular(50),\n              bottomRight: Radius.circular(50)),\n          boxShadow: [\n            // 添加阴影\n            BoxShadow(\n                color: Colors.grey,\n                offset: Offset(1, 1),\n                blurRadius: 10,\n                spreadRadius: 1),\n          ]),\n      child: Text(\n        'Container',\n        style: TextStyle(fontSize: 18),\n      ),\n    );\n  }\n}\n",
+          "isOpen": false
+        },
+        {
+          "id": 5,
+          "name": "Container",
+          "title": "坐标变换",
+          "explain": "【transform】 : 变换矩阵 \n【Matrix4】基于Matrix4的矩阵变换，变换详情见线性代数 \n",
+          "code": "class ContainerTransform extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) {\n    return Row(\n      mainAxisAlignment: MainAxisAlignment.center,\n      children: [\n        Padding(\n          padding: const EdgeInsets.all(8.0),\n          child: Container(\n            //容器\n            alignment: Alignment.center,\n            color: Colors.cyanAccent,\n            width: 80,\n            height: 80 * 0.618,\n            transform: Matrix4.skew(-pi / 8, 0),\n            child: Text(\n              'Container',\n              style: TextStyle(fontSize: 16),\n            ),\n          ),\n        ),\n        Padding(\n          padding: const EdgeInsets.all(8.0),\n          child: Container(\n            //容器\n            alignment: Alignment.center,\n            color: Colors.cyanAccent,\n            width: 80,\n            height: 80 * 0.618,\n            transform: Matrix4.rotationZ(1.75*pi),\n            child: Text(\n              'rotationZ',\n              style: TextStyle(fontSize: 16),\n            ),\n          ),\n        ),\n        Padding(\n          padding: const EdgeInsets.all(8.0),\n          child: Container(\n            //容器\n            alignment: Alignment.center,\n            color: Colors.cyanAccent,\n            width: 80,\n            height: 80 * 0.618,\n            transform: Matrix4.rotationY(0.3*pi),\n            child: Text(\n              'rotationY',\n              style: TextStyle(fontSize: 16),\n            ),\n          ),\n        ),\n      ],\n    );\n  }\n}",
+          "isOpen": false
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Padding",
+      "title": "边距组件",
+      "desc": "设置内边距属性，内边距的空白区域，也是widget的一部分。当child为空的时候，会产生一个宽为left+right，高为top+bottom的区域,当child不为空的时候，Padding会将布局约束传递给child，根据设置的padding属性，缩小child的布局尺寸。然后Padding将自己调整到child设置了padding属性的尺寸，在child周围创建空白区域",
+      "lever": 4.0,
+      "segments": [
+        {
+          "id": 0,
+          "name": "Padding",
+          "title": "四边等距",
+          "explain": "【child】 : 孩子组件   【Widget】 \n【padding】 : 内四边距   【EdgeInsetsGeometry】 \n EdgeInsets.all用来限定相同的四边边距 \n",
+          "code": "class PaddingAll extends StatelessWidget {\n\n  @override\n  Widget build(BuildContext context) {\n    return Container(\n      color: Colors.cyan,\n      width: 180,\n      height: 180 * 0.618,\n      child: Padding(\n        padding: EdgeInsets.all(30),\n        child: _buildChild(),\n      ),\n    );\n  }\n\n  Widget _buildChild() {\n    return Container(\n      alignment: Alignment.center,\n      color: Colors.blue,\n      child: Text('孩子'),\n    );\n  }\n}\n\n",
+          "isOpen": false
+        },
+        {
+          "id": 1,
+          "name": "Padding",
+          "title": "方向边距",
+          "explain": " 【EdgeInsets.symmetric】  用来限定水平和竖直方向的边距 \n 【vertical】 :  垂直方向间距 \n 【horizontal】: 水平方向间距 \n",
+          "code": "class PaddingSymmetric extends StatelessWidget {\n\n  @override\n  Widget build(BuildContext context) {\n    return Container(\n      color: Colors.cyan,\n      width: 180,\n      height: 180 * 0.618,\n      child: Padding(\n        padding: EdgeInsets.symmetric(vertical: 10,horizontal: 30),\n        child: _buildChild(),\n      ),\n    );\n  }\n  Widget _buildChild() {\n    return Container(\n      alignment: Alignment.center,\n      color: Colors.blue,\n      child: Text('孩子'),\n    );\n  }\n}\n\n",
+          "isOpen": false
+        },
+        {
+          "id": 2,
+          "name": "Padding",
+          "title": "单独方向边距",
+          "explain": " 【EdgeInsets.only】  用来限定不同的四边边距 \n",
+          "code": "class PaddingOnly extends StatelessWidget {\n\n  @override\n  Widget build(BuildContext context) {\n    return Container(\n      color: Colors.cyan,\n      width: 180,\n      height: 180 * 0.618,\n      child: Padding(\n        padding: EdgeInsets.only(top:10,left: 20,right: 15,bottom: 40),\n        child: _buildChild(),\n      ),\n    );\n  }\n\n  Widget _buildChild() {\n    return Container(\n      alignment: Alignment.center,\n      color: Colors.blue,\n      child: Text('孩子'),\n    );\n  }\n}\n",
+          "isOpen": false
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Align",
+      "title": "对齐组件",
+      "desc": "容纳一个子组件 通过 alignment 设置child的对齐方式",
+      "lever": 5.0,
+      "segments": [
+        {
+          "id": 0,
+          "name": "Align",
+          "title": "基本使用",
+          "explain": "【child】 : 孩子组件   【Widget】 \n【alignment】 : 对齐方式    【AlignmentGeometry】 \n",
+          "code": "class BaseAlign extends StatelessWidget {\n  final alignments = [\n    Alignment.topLeft,\n    Alignment.topCenter,\n    Alignment.topRight,\n    Alignment.centerLeft,\n    Alignment.center,\n    Alignment.centerRight,\n    Alignment.bottomLeft,\n    Alignment.bottomCenter,\n    Alignment.bottomRight,\n  ];\n\n  final alignmentsInfo = [\n    'topLeft',\n    'topCenter',\n    'topRight',\n    'centerLeft',\n    'center',\n    'centerRight',\n    'bottomLeft',\n    'bottomCenter',\n    'bottomRight',\n  ];\n\n  @override\n  Widget build(BuildContext context) {\n    return Wrap(\n        children: alignments\n            .toList()\n            .map((mode) => Column(children: <Widget>[\n          Container(\n              margin: EdgeInsets.all(5),\n              width: 100,\n              height: 60,\n              color: Colors.cyan,\n              child: Align(\n                  child: Container(\n                    width: 30,\n                    height: 30,\n                    color: Colors.blue,\n                  ),\n                  alignment: mode)),\n          Text(alignmentsInfo[alignments.indexOf(mode)])\n        ]))\n            .toList());\n  }\n}\n\n",
+          "isOpen": false
+        },
+        {
+          "id": 1,
+          "name": "Align",
+          "title": "X 、Y 坐标",
+          "explain": "【child】 : 孩子组件   【Widget】 \n【alignment】 : 由于Alignment对象可指定在父容器中宽高的分率位置 \n x , y 实现一些复杂的排布需求，比如按指定的数学方程变化位置 \n",
+          "code": "class AlignXYLayout extends StatefulWidget {\n  AlignXYLayout({\n    Key key,\n  }) : super(key: key);\n\n  @override\n  _AlignXYLayoutState createState() => _AlignXYLayoutState();\n}\n\nclass _AlignXYLayoutState extends State<AlignXYLayout> {\n  var _x = 0.0; //Alignment坐标系上的x坐标\n\n  @override\n  Widget build(BuildContext context) {\n    var item = Container(\n      width: 320,\n      height: 180,\n      color: Colors.cyan,\n      child: Align(\n        child: Ball(\n          color: Colors.blue,\n        ),\n        alignment: Alignment(_x, f(_x * pi)),\n      ),\n    );\n\n    var slider = Slider(\n        max: 180,\n        min: -180,\n        divisions: 360,\n        label: '${_x.toStringAsFixed(2)}π',\n        value: _x * 180,\n        onChanged: (v) => setState(() => _x = v / 180));\n    return Column(\n      mainAxisSize: MainAxisSize.min,\n      children: <Widget>[item,slider],\n    );\n  }\n\n  double f(x) {\n    //映射函数 -- 可随意指定\n    double y = sin(x);\n    return y;\n  }\n}\n\nclass Ball extends StatelessWidget {\n  Ball({\n    Key key,\n    this.radius = 15,\n    this.color = Colors.blue,\n  }) : super(key: key);\n  final double radius; //半径\n  final Color color; //颜色\n\n  @override\n  Widget build(BuildContext context) {\n    return Container(\n      width: radius * 2,\n      height: radius * 2,\n      decoration: BoxDecoration(\n        shape: BoxShape.circle,\n        color: color,\n      ),\n    );\n  }\n}\n",
+          "isOpen": false
+        },
+        {
+          "id": 2,
+          "name": "Align",
+          "title": "AlignFactor",
+          "explain": "【child】 : 孩子组件   【Widget】 \n【widthFactor】 : 宽度因子 \n【heightFactor】: 高度因子 \n Align 配合Center会根据factor属性，扩展自己的尺寸，例如设置widthFactor为2.0的时候，那么，Align的宽度将会是child的两倍 \n",
+          "code": "class AlignCenterFactor extends StatelessWidget {\n  final alignments = [\n    1.0,\n    2.0,\n  ];\n\n  final alignmentsInfo = [\n    'Factor=1',\n    'Factor=2',\n  ];\n\n  @override\n  Widget build(BuildContext context) {\n    return Wrap(\n        children: alignments\n            .toList()\n            .map((mode) => Column(children: <Widget>[\n          Container(\n              margin: EdgeInsets.all(5),\n              width: 160,\n              height: 160 ,\n              color: Colors.cyan,\n              child: Align(\n                  child: Center(\n                    child: Container(\n                      color: Colors.blue,\n                      width: 40,\n                      height: 40,\n                    ),\n                    widthFactor: mode,\n                    heightFactor: mode,\n                  ),\n                  alignment: Alignment.topCenter)),\n          Text(alignmentsInfo[alignments.indexOf(mode)])\n        ]))\n            .toList());\n  }\n}",
+          "isOpen": false
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Center",
+      "title": "居中组件",
+      "desc": "容纳一个子组件 并使其居中于父组件，是Align组件的一种精简模式",
+      "lever": 3.0,
+      "segments": [
+        {
+          "id": 0,
+          "name": "Center",
+          "title": "基本使用",
+          "explain": "【child】 : 孩子组件   【Widget】 \n",
+          "code": "class BaseCenter extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) {\n    return Container(\n        margin: EdgeInsets.all(5),\n        width: 180,\n        height: 180 * 0.618,\n        color: Colors.cyan,\n        child: Center(\n            child: Container(\n              width: 80,\n              height: 80 * 0.618,\n              color: Colors.blue,\n            )));\n  }\n}",
+          "isOpen": false
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Flex",
+      "title": "弹性布局",
+      "desc": "弹性布局允许子组件按照一定比例来分配父容器空间。 Row和Column都继承自Flex ,如H5中的弹性盒子布局，Android中的FlexboxLayout等。通过Flexible和Expanded来配合实现灵活的布局",
+      "lever": 5.0,
+      "segments": [
+        {
+          "id": 0,
+          "name": "Flex",
+          "title": "基本使用",
+          "explain": "【children】 : 组件列表   【List<Widget>】 \n【direction】 : 方向   【Axis】 \n【Axis.values】: 【horizontal】水平【vertical】垂直 \n",
+          "code": "class DirectionFlex extends StatelessWidget {\n  final cyanBox = Container(\n    color: Colors.cyan,\n    height: 50 * 0.618,\n    width: 50,\n  );\n\n  final blueBox = Container(\n    color: Colors.blue,\n    height: 40 * 0.618,\n    width: 40,\n  );\n\n  final greenBox = Container(\n    color: Colors.green,\n    height: 30 * 0.618,\n    width: 30,\n  );\n  @override\n  Widget build(BuildContext context) {\n    return Wrap(\n        children: Axis.values\n            .map((mode) => Column(children: <Widget>[\n                  Container(\n                      margin: EdgeInsets.all(5),\n                      width: 150,\n                      height: 150 * 0.618,\n                      color: Colors.cyanAccent.withAlpha(33),\n                      child: _buildItem(mode)),\n                  Text(mode.toString().split('.')[1])\n                ]))\n            .toList());\n  }\n\n  _buildItem(mode) => Flex(\n        direction: mode,\n        children: <Widget>[blueBox, cyanBox, greenBox],\n      );\n}\n\n\n",
+          "isOpen": false
+        },
+        {
+          "id": 1,
+          "name": "Flex",
+          "title": "主轴对齐方式",
+          "explain": "【children】 : 组件列表   【List<Widget>】 \n【mainAxisAlignment】 : 交叉轴对齐   【MainAxisAlignment】 \n",
+          "code": "class MainAxisAlignmentFlex extends StatelessWidget {\n  final cyanBox = Container(\n    color: Colors.cyan,\n    height: 50 * 0.618,\n    width: 50,\n  );\n\n  final blueBox = Container(\n    color: Colors.blue,\n    height: 40 * 0.618,\n    width: 40,\n  );\n\n  final greenBox = Container(\n    color: Colors.green,\n    height: 30 * 0.618,\n    width: 30,\n  );\n  @override\n  Widget build(BuildContext context) {\n    return Wrap(\n        runSpacing: 5,\n        children: MainAxisAlignment.values\n            .map((mode) => Column(children: <Widget>[\n                  Container(\n                      margin: EdgeInsets.all(5),\n                      width: 150,\n                      height: 150 * 0.618,\n                      color: Colors.cyanAccent.withAlpha(33),\n                      child: _buildItem(mode)),\n                  Text(mode.toString().split('.')[1])\n                ]))\n            .toList());\n  }\n\n  _buildItem(mode) => Flex(\n        direction: Axis.horizontal,\n        mainAxisAlignment: mode,\n        children: <Widget>[blueBox, cyanBox, greenBox],\n      );\n}\n\n",
+          "isOpen": false
+        },
+        {
+          "id": 2,
+          "name": "Flex",
+          "title": "交叉轴对齐",
+          "explain": "【children】 : 组件列表   【List<Widget>】 \n【crossAxisAlignment】 : 交叉轴对齐   【CrossAxisAlignment】 \n",
+          "code": "class CrossAxisAlignmentFlex extends StatelessWidget {\n  final cyanBox = Container(\n    color: Colors.cyan,\n    height: 50 * 0.618,\n    width: 50,\n  );\n\n  final blueBox = Container(\n    color: Colors.blue,\n    height: 40 * 0.618,\n    width: 40,\n  );\n\n  final greenBox = Container(\n    color: Colors.green,\n    height: 30 * 0.618,\n    width: 30,\n  );\n  @override\n  Widget build(BuildContext context) {\n    return Wrap(\n        runSpacing: 5,\n        children: CrossAxisAlignment.values\n            .map((mode) => Column(children: <Widget>[\n                  Container(\n                      margin: EdgeInsets.all(5),\n                      width: 150,\n                      height: 150 * 0.618,\n                      color: Colors.cyan.withAlpha(33),\n                      child: _buildItem(mode)),\n                  Text(mode.toString().split('.')[1])\n                ]))\n            .toList());\n  }\n\n  _buildItem(mode) => Flex(\n        direction: Axis.horizontal,\n        crossAxisAlignment: mode,\n        textBaseline: TextBaseline.alphabetic,\n        children: <Widget>[blueBox, cyanBox, greenBox],\n      );\n}\n\n",
+          "isOpen": false
+        },
+        {
+          "id": 3,
+          "name": "Flex",
+          "title": "垂直方向顺序",
+          "explain": "【verticalDirection】 垂直方向顺序  [up、down] \n",
+          "code": "class VerticalDirectionFlex extends StatelessWidget {\n  final cyanBox = Container(\n    color: Colors.cyan,\n    height: 50 * 0.618,\n    width: 50,\n  );\n\n  final blueBox = Container(\n    color: Colors.blue,\n    height: 40 * 0.618,\n    width: 40,\n  );\n\n  final greenBox = Container(\n    color: Colors.green,\n    height: 30 * 0.618,\n    width: 30,\n  );\n  @override\n  Widget build(BuildContext context) {\n    return Wrap(\n        runSpacing: 5,\n        children: VerticalDirection.values\n            .map((mode) => Column(children: <Widget>[\n                  Container(\n                      margin: EdgeInsets.all(5),\n                      width: 150,\n                      height: 150 * 0.618,\n                      color: Colors.cyan.withAlpha(33),\n                      child: _buildItem(mode)),\n                  Text(mode.toString().split('.')[1])\n                ]))\n            .toList());\n  }\n\n  _buildItem(mode) => Flex(\n        direction: Axis.vertical,\n        verticalDirection: mode,\n        children: <Widget>[blueBox, cyanBox, greenBox],\n      );\n}\n\n",
+          "isOpen": false
+        },
+        {
+          "id": 4,
+          "name": "Flex",
+          "title": "水平方向顺序",
+          "explain": "【ltr】 正常方向左到右 【rtl】 反方向 右到左 \n",
+          "code": "class TextDirectionFlex extends StatelessWidget {\n\n  final cyanBox = Container(\n    color: Colors.cyan,\n    height: 50 * 0.618,\n    width: 50,\n  );\n\n  final blueBox = Container(\n    color: Colors.blue,\n    height: 40 * 0.618,\n    width: 40,\n  );\n\n  final greenBox = Container(\n    color: Colors.green,\n    height: 30 * 0.618,\n    width: 30,\n  );\n\n  @override\n  Widget build(BuildContext context) {\n    return Wrap(\n        runSpacing: 5,\n        children: TextDirection.values\n            .map((mode) => Column(children: <Widget>[\n          Container(\n              margin: EdgeInsets.all(5),\n              width: 150,\n              height: 150*0.618,\n              color: Colors.cyan.withAlpha(33),\n              child: _buildItem(mode)),\n          Text(mode.toString().split('.')[1])\n        ]))\n            .toList());\n  }\n\n  _buildItem(mode) => Flex(\n    direction: Axis.horizontal,\n    textDirection: mode,\n    children: <Widget>[\n      blueBox, cyanBox, greenBox\n    ],\n  );\n}\n",
+          "isOpen": false
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Column",
+      "title": "列布局",
+      "desc": "排布方向为竖向的Flex布局，容纳多个子组件",
+      "lever": 4.0,
+      "segments": [
+        {
+          "id": 0,
+          "name": "Column",
+          "title": " 基本用法",
+          "explain": "【children】 : 组件列表   【List<Widget>】 \n 【mainAxisAlignment】 : 主轴对齐   【MainAxisAlignment】 \n 【crossAxisAlignment】 : 交叉轴对齐   【CrossAxisAlignment】 \n 【textBaseline】 : 文字基线   【TextBaseline】 \n 【verticalDirection】 : 竖直方向   【VerticalDirection】 \n 【mainAxisSize】 : 主轴尺寸   【MainAxisSize.max】 以父组件尺寸 【MainAxisSize.min】 子组件尺寸 \n 【textDirection】 : 文本方向   【ltr】 正常方向左到右 【rtl】 反方向 右到左 \n",
+          "code": "class BaseColumnWidget extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) {\n\n    return Container(\n      width: 300,\n      constraints: BoxConstraints(\n        maxHeight: 300 * 0.618\n      ),\n      color: Colors.cyan,\n      child: Column(\n        mainAxisSize: MainAxisSize.max,\n        mainAxisAlignment: MainAxisAlignment.end,\n        crossAxisAlignment: CrossAxisAlignment.end,\n        children: <Widget>[\n          Padding(\n            child: Icon(\n              Icons.add_location,\n              size: 30,\n              color: Colors.blue,\n            ),\n            padding: EdgeInsets.only(left: 25, right: 20),\n          ),\n          Text(\n            '位置',\n            style: TextStyle(fontSize: 20),\n          ),\n          Padding(\n            child: Icon(Icons.keyboard_arrow_right, color: Colors.black38),\n            padding: EdgeInsets.only(right: 25),\n          ),\n        ],\n      ),\n    );\n  }\n}",
+          "isOpen": false
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Row",
+      "title": "行布局",
+      "desc": "排布方向为横向的Flex布局，容纳多个子组件",
+      "lever": 4.0,
+      "segments": [
+        {
+          "id": 0,
+          "name": "Row",
+          "title": " 基本用法",
+          "explain": "【children】 : 组件列表   【List<Widget>】 \n 【mainAxisAlignment】 : 主轴对齐   【MainAxisAlignment】 \n 【crossAxisAlignment】 : 交叉轴对齐   【CrossAxisAlignment】 \n 【textBaseline】 : 文字基线   【TextBaseline】 \n 【verticalDirection】 : 竖直方向   【VerticalDirection】 \n 【mainAxisSize】 : 主轴尺寸   【MainAxisSize.max】 以父组件尺寸 【MainAxisSize.min】 子组件尺寸 \n 【textDirection】 : 文本方向   【ltr】 正常方向左到右 【rtl】 反方向 右到左 \n",
+          "code": "class BaseRowWidget extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) {\n    return Container(\n        height: 60,\n        color: Colors.cyan,\n        child: Row(\n          mainAxisSize: MainAxisSize.min,\n          mainAxisAlignment: MainAxisAlignment.end,\n          crossAxisAlignment: CrossAxisAlignment.end,\n          textDirection: TextDirection.rtl,\n          children: <Widget>[\n            Padding(\n              child: Icon(\n                Icons.add_location,\n                size: 30,\n                color: Colors.blue,\n              ),\n              padding: EdgeInsets.only(left: 25, right: 20),\n            ),\n            Text(\n              '位置',\n              style: TextStyle(fontSize: 20),\n            ),\n            Padding(\n              child: Icon(Icons.keyboard_arrow_right, color: Colors.black38),\n              padding: EdgeInsets.only(right: 25),\n            ),\n          ],\n        ));\n  }\n}\n",
+          "isOpen": false
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "ListView",
+      "title": "列表组件",
+      "desc": "ListView是最常用的可滚动组件之一，用于展示大量数据的列表。",
+      "lever": 5.0,
+      "segments": [
+        {
+          "id": 0,
+          "name": "ListView",
+          "title": "默认构造函数",
+          "explain": "【scrollDirection】 :  滑动方向   【Axis】 \n【reverse】 :  数据是否反向   【bool】 \n【controller】 :  控制器   【Color】 \n【physics】 :  滚动特性   【ScrollPhysics】 \n【padding】 :  内边距   【EdgeInsetsGeometry】 \n【shrinkWrap】 :  无边界时是否包裹  【bool】 \n【children】 :  子组件列表  【List<Widget>】 \n",
+          "code": "class BaseListView extends StatelessWidget {\n  // 这种方式，只适用于子组件较少的情况\n  @override\n  Widget build(BuildContext context) {\n    return Container(\n      height: 220,\n      child: ListView(\n        padding: const EdgeInsets.all(10.0),\n        children: <Widget>[\n          ListNoteItem(),\n          ListNoteItem(),\n          ListNoteItem(),\n          ListNoteItem(),\n        ],\n      ),\n    );\n  }\n}\n\n",
+          "isOpen": false
+        },
+        {
+          "id": 1,
+          "name": "ListView",
+          "title": "ListView.builder构造",
+          "explain": "【itemCount】 :  条目个数   【int】 \n【itemBuilder】 :  条目构造器   【IndexedWidgetBuilder】 \n【itemExtent】 :  强制高度   【double】 \n",
+          "code": "class BuilderListView extends StatelessWidget {\n  // 这种方式，适合列表项比较多（或者无限）的情况\n  // 因为只有当子组件真正显示的时候才会被创建\n  @override\n  Widget build(BuildContext context) {\n    return Container(\n      height: 300,\n      child: ListView.builder(\n        itemCount: 50,\n        itemBuilder: (context, index) => ListNoteItem(),\n      ),\n    );\n  }\n}\n\n",
+          "isOpen": false
+        },
+        {
+          "id": 2,
+          "name": "ListView",
+          "title": "ListView.separated构造",
+          "explain": "【separatorBuilder】 :  分割组件生成器   【IndexedWidgetBuilder】 \n",
+          "code": "class SeparatedListView extends StatelessWidget {\n  // 这种方式，可以在生成的列表项之间添加一个分割组件\n  @override\n  Widget build(BuildContext context) {\n    return Container(\n      height: 300,\n      margin: EdgeInsets.symmetric(vertical: 6, horizontal: 8),\n      decoration: BoxDecoration(\n        color: Colors.white,\n        borderRadius: BorderRadius.all(Radius.circular(6)),\n      ),\n      child: ListView.separated(\n        itemCount: 10,\n        itemBuilder: (BuildContext context, int index) {\n          return ListTile(\n            title: Center(\n              child: Text('第 ${index + 1} 行'),\n            ),\n          );\n        },\n        separatorBuilder: (BuildContext context, int index) {\n          return Divider(\n            color: Colors.pinkAccent,\n            thickness: 1,\n            indent: 15,\n            endIndent: 15,\n          );\n        },\n      ),\n    );\n  }\n}\n\n",
+          "isOpen": false
+        },
+        {
+          "id": 3,
+          "name": "ListView",
+          "title": "ShrinkWrapListView",
+          "explain": "",
+          "code": "class ShrinkWrapListView extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) {\n    return Column(\n      children: [\n        Text('1'),\n        ListView.builder(\n          shrinkWrap: true,\n          physics: NeverScrollableScrollPhysics(),\n          itemCount: 3,\n          itemBuilder: (context, index) => ListNoteItem(),\n        ),\n        Text('2'),\n        ListView.builder(\n          shrinkWrap: true,\n          physics: NeverScrollableScrollPhysics(),\n          itemCount: 2,\n          itemBuilder: (context, index) => ListNoteItem(),\n        ),\n      ],\n    );\n  }\n}",
+          "isOpen": false
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "name": "GridView",
+      "title": "列表组件",
+      "desc": "以二维网格列表的方式，容纳多个组件。和ListView的大多数参数相同。",
+      "lever": 5.0,
+      "segments": [
+        {
+          "id": 0,
+          "name": "GridView",
+          "title": "默认构造函数",
+          "explain": "【scrollDirection】 :  滑动方向   【Axis】 \n【reverse】 :  数据是否反向   【bool】 \n【controller】 :  控制器   【Color】 \n【physics】 :  滚动特性   【ScrollPhysics】 \n【padding】 :  内边距   【EdgeInsetsGeometry】 \n【shrinkWrap】 :  无边界时是否包裹  【bool】 \n【children】 :  子组件列表  【List<Widget>】 \n【gridDelegate】 :  Layout相关接口  【SliverGridDelegate】 \n【maxCrossAxisExtent】 :  每个元素在横轴上的最大长度  【double】 \n【crossAxisCount】 :  横轴元素的数量  【int】 \n【crossAxisSpacing】 :  横轴方向元素的间距  【double】 \n【mainAxisSpacing】 :  主轴方向的间距  【double】 \n【childAspectRatio】 :  横轴长度和主轴长度的比例  【double】 \n",
+          "code": "class BaseGridView extends StatelessWidget {\n  // 这种方式，只适用于子组件较少的情况\n  @override\n  Widget build(BuildContext context) {\n    return Container(\n      height: 230,\n      child: GridView(\n        // SliverGridDelegate是一个抽象类，定义了GridView Layout相关接口\n        // Flutter中提供两种方式来实现布局\n\n        // 1. SliverGridDelegateWithMaxCrossAxisExtent 横轴为固定数量子元素\n        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(\n          maxCrossAxisExtent: 80,\n          crossAxisSpacing: 15,\n          mainAxisSpacing: 15,\n          childAspectRatio: 1.0,\n        ),\n        // 2. SliverGridDelegateWithFixedCrossAxisCount 横轴子元素为固定最大长度\n\n        // gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(\n        //   crossAxisCount: 4,\n        //   crossAxisSpacing: 20,\n        //   mainAxisSpacing: 10,\n        //   childAspectRatio: 1.0\n        // ),\n        children: <Widget>[for (int i = 0; i < 15; i++) GridNoteItem()],\n      ),\n    );\n  }\n}\n\n",
+          "isOpen": false
+        },
+        {
+          "id": 1,
+          "name": "GridView",
+          "title": "GridView.count",
+          "explain": "",
+          "code": "class CountGridView extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) {\n    // 内部使用了SliverGridDelegateWithFixedCrossAxisCount\n    return GridView.count(\n      shrinkWrap: true,\n      crossAxisCount: 4,\n      mainAxisSpacing: 10,\n      childAspectRatio: 1.5,\n      children: <Widget>[for (int i = 0; i < 15; i++) GridNoteItem()],\n    );\n  }\n}\n\n",
+          "isOpen": false
+        },
+        {
+          "id": 2,
+          "name": "GridView",
+          "title": "GridView.extent",
+          "explain": "",
+          "code": "class ExtentGridView extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) {\n    // 内部使用了SliverGridDelegateWithMaxCrossAxisExtent\n    return GridView.extent(\n      shrinkWrap: true,\n      maxCrossAxisExtent: 80,\n      mainAxisSpacing: 10,\n      childAspectRatio: 1.5,\n      children: <Widget>[for (int i = 0; i < 15; i++) GridNoteItem()],\n    );\n  }\n}\n\n",
+          "isOpen": false
+        },
+        {
+          "id": 3,
+          "name": "GridView",
+          "title": "GridView.builder",
+          "explain": "【itemCount】 :  组件个数   【int】 \n【gridDelegate】 :  Layout相关接口  【SliverGridDelegate】 \n【itemBuilder】 :  子组件生成器   【IndexedWidgetBuilder】 \n",
+          "code": "class BuilderGridView extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) {\n    return SizedBox(\n      height: 250,\n      child: GridView.builder(\n        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(\n          crossAxisCount: 4,\n          crossAxisSpacing: 10,\n          mainAxisSpacing: 10,\n          childAspectRatio: 1.0,\n        ),\n        itemBuilder: (BuildContext context, int index) {\n          return GridNoteItem();\n        },\n        itemCount: 30,\n      ),\n    );\n  }\n}\n\n",
+          "isOpen": false
+        },
+        {
+          "id": 4,
+          "name": "GridView",
+          "title": "ShrinkWrapGridView",
+          "explain": "",
+          "code": "class ShrinkWrapGridView extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) {\n    return Column(\n      children: [\n        Text('ListView'),\n        ListView.builder(\n          shrinkWrap: true,\n          physics: NeverScrollableScrollPhysics(),\n          itemCount: 5,\n          itemBuilder: (context, index) => ListNoteItem(),\n        ),\n        Text('GridView'),\n        GridView.builder(\n          shrinkWrap: true,\n          physics: NeverScrollableScrollPhysics(),\n          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(\n            crossAxisCount: 4,\n            crossAxisSpacing: 10,\n            mainAxisSpacing: 10,\n            childAspectRatio: 1.0,\n          ),\n          itemBuilder: (BuildContext context, int index) {\n            return GridNoteItem();\n          },\n          itemCount: 11,\n        ),\n      ],\n    );\n  }\n}\n",
+          "isOpen": false
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "name": "ScrollView",
+      "title": "滚动组件",
+      "desc": "用于展示更多内容的滚动组件。",
+      "lever": 5.0,
+      "segments": [
+        {
+          "id": 0,
+          "name": "ScrollView",
+          "title": "SingleChildScrollView",
+          "explain": "【scrollDirection】 :  滑动方向   【Axis】 \n【reverse】 :  数据是否反向   【bool】 \n【controller】 :  控制器   【Color】 \n【physics】 :  滚动特性   【ScrollPhysics】 \n【padding】 :  内边距   【EdgeInsetsGeometry】 \n【child】 :  子组件  【Widget】 \n",
+          "code": "class SingleChildScrollViewNote extends StatelessWidget {\n  // 只能包含单个组件\n  // 没有懒加载模式，性能不如ListView\n  @override\n  Widget build(BuildContext context) {\n    return Container(\n      height: 300,\n      child: SingleChildScrollView(\n        padding: EdgeInsets.all(10),\n        child: Column(\n          children: List.generate(50, (index) {\n            return ListNoteItem();\n          }).toList(),\n        ),\n      ),\n    );\n  }\n}\n\n",
+          "isOpen": false
+        },
+        {
+          "id": 1,
+          "name": "ScrollView",
+          "title": "CustomScrollView",
+          "explain": "【slivers】 :  子组件列表   【List<Widget>】 \n【reverse】 :  数据是否反向   【bool】 \n【scrollDirection】 :  scrollDirection   【Axis】 \n",
+          "code": "class CustomScrollViewNote extends StatelessWidget {\n  // CustomScrollView就像一个粘合剂，将多个组件粘合在一起并具有统一的滚动效果\n  // CustomScrollView通过使用Sliver组件创建自定义滚动列表\n  // Sliver系列组件有很多，比如SliverList、SliverGrid、SliverAppBar等\n\n  CustomScrollViewNote({\n    this.isFullScreen = false,\n  });\n\n  final bool isFullScreen;\n\n  @override\n  Widget build(BuildContext context) {\n    return Container(\n      color: Color.fromRGBO(243, 243, 243, 1),\n      height: isFullScreen ? MediaQuery.of(context).size.height : 550,\n      child: CustomScrollView(\n        slivers: <Widget>[\n          _buildSliverAppBar(context),\n          _buildHeader('小程序'),\n          _buildSliverGrid(),\n          _buildHeader('发现'),\n          _buildSliverList(),\n        ],\n      ),\n    );\n  }\n\n  Widget _buildSliverAppBar(BuildContext context) {\n    return SliverAppBar(\n      expandedHeight: 145,\n      title: Text('我的'),\n      actions: [\n        if (!isFullScreen)\n          FlatButton(\n            minWidth: 55,\n            child: Text(\n              '预览',\n              style: TextStyle(\n                fontSize: 16,\n                color: Colors.white,\n                fontWeight: FontWeight.bold,\n              ),\n            ),\n            onPressed: () {\n              Navigator.of(context).push(\n                MaterialPageRoute(builder: (context) {\n                  return Scaffold(\n                    body: CustomScrollViewNote(isFullScreen: true),\n                  );\n                }),\n              );\n            },\n          ),\n      ],\n      elevation: 0,\n      flexibleSpace: FlexibleSpaceBar(\n        stretchModes: [StretchMode.fadeTitle],\n        background: Padding(\n          padding: const EdgeInsets.only(bottom: 10),\n          child: Row(\n            crossAxisAlignment: CrossAxisAlignment.end,\n            mainAxisAlignment: MainAxisAlignment.start,\n            children: [\n              Padding(\n                padding: const EdgeInsets.only(left: 15),\n                child: ClipRRect(\n                  borderRadius: BorderRadius.circular(6),\n                  child: Image.asset(\n                    'assets/images/common/avatar.jpg',\n                    width: 70,\n                    height: 70,\n                  ),\n                ),\n              ),\n              Expanded(\n                child: Column(\n                  mainAxisAlignment: MainAxisAlignment.end,\n                  crossAxisAlignment: CrossAxisAlignment.start,\n                  children: [\n                    Padding(\n                      padding: const EdgeInsets.symmetric(\n                          horizontal: 15, vertical: 3),\n                      child: Text(\n                        '丸子',\n                        style: TextStyle(\n                          fontSize: 25,\n                          color: Colors.white,\n                          fontWeight: FontWeight.bold,\n                        ),\n                      ),\n                    ),\n                    Padding(\n                      padding: const EdgeInsets.symmetric(\n                          horizontal: 15, vertical: 3),\n                      child: Row(\n                        mainAxisAlignment: MainAxisAlignment.start,\n                        children: [\n                          Expanded(\n                            child: Text(\n                              '手机号：137****689',\n                              style: TextStyle(\n                                fontSize: 15,\n                                color: Colors.white,\n                              ),\n                            ),\n                          ),\n                          Wrap(\n                            alignment: WrapAlignment.end,\n                            crossAxisAlignment: WrapCrossAlignment.center,\n                            spacing: 10,\n                            children: [\n                              Icon(\n                                Icons.qr_code,\n                                size: 20,\n                                color: Colors.white,\n                              ),\n                              Icon(\n                                Icons.chevron_right,\n                                size: 30,\n                                color: Colors.white,\n                              ),\n                            ],\n                          )\n                        ],\n                      ),\n                    ),\n                  ],\n                ),\n              ),\n            ],\n          ),\n        ),\n      ),\n    );\n  }\n\n  Widget _buildHeader(String title) {\n    return SliverToBoxAdapter(\n      child: TextTitle(\n        title,\n        color: Colors.black54,\n      ),\n    );\n  }\n\n  Widget _buildSliverGrid() {\n    return SliverGrid(\n      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(\n        crossAxisCount: 4,\n        mainAxisSpacing: 8.0,\n        crossAxisSpacing: 8.0,\n      ),\n      delegate: SliverChildBuilderDelegate(\n        (BuildContext context, int index) {\n          return GridNoteItem();\n        },\n        childCount: 15,\n      ),\n    );\n  }\n\n  Widget _buildSliverList() {\n    return SliverList(\n      delegate: SliverChildBuilderDelegate(\n        (BuildContext context, int index) {\n          return ListNoteItem0(index);\n        },\n        childCount: 7,\n      ),\n    );\n  }\n}\n",
+          "isOpen": false
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "name": "NestedScrollView",
+      "title": "嵌套滑动组件",
+      "desc": "用于多个视图滑动嵌套处理,可以指定头部、滑动控制器、滑动方向等，其中body必须是可滑动类型的组件。",
+      "lever": 3.0,
+      "segments": [
+        {
+          "id": 0,
+          "name": "NestedScrollView",
+          "title": "NestedScrollView",
+          "explain": "【scrollDirection】 :  滑动方向   【Axis】 \n【reverse】 :  数据是否反向   【bool】 \n【controller】 :  控制器   【Color】 \n【physics】 :  滚动特性   【ScrollPhysics】 \n【dragStartBehavior】 :  开始拖动行为   【DragStartBehavior】 \n【headerSliverBuilder】 :  头部构造器  【NestedScrollViewHeaderSliversBuilder】 \n【body】 :  头部构造器  【内容】 \n",
+          "code": "class NestedScrollViewNote extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) {\n    final _tabs = ['科技', '文化', \"音乐\", \"专栏\"];\n    return SizedBox(\n      height: 700,\n      child: DefaultTabController(\n        length: _tabs.length,\n        child: NestedScrollView(\n          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {\n            return <Widget>[\n              SliverOverlapAbsorber(\n                handle:\n                    NestedScrollView.sliverOverlapAbsorberHandleFor(context),\n                sliver: SliverAppBar(\n                  title: const Text(\n                    '微应用',\n                    style: TextStyle(\n                      fontSize: 18.0,\n                      color: Colors.black87,\n                      fontWeight: FontWeight.bold,\n                    ),\n                  ),\n                  leading: IconButton(\n                    padding: EdgeInsets.all(17),\n                    icon: Icon(\n                      Icons.arrow_back_ios,\n                      color: Colors.black,\n                      size: 25,\n                    ),\n                    onPressed: () {\n                      Navigator.pop(context);\n                    },\n                  ),\n                  pinned: true,\n                  elevation: 6,\n                  expandedHeight: 220.0,\n                  backgroundColor: Colors.white,\n                  forceElevated: innerBoxIsScrolled,\n                  flexibleSpace: FlexibleSpaceBar(\n                    background: Image.asset(\n                      'assets/images/basics/basics_bg.jpg',\n                      fit: BoxFit.cover,\n                    ),\n                  ),\n                  bottom: TabBar(\n                    labelColor: Colors.black,\n                    unselectedLabelColor: Colors.black54,\n                    labelStyle: TextStyle(\n                      fontSize: 18.0,\n                      fontWeight: FontWeight.bold,\n                    ),\n                    indicatorWeight: 2,\n                    indicatorColor: Colors.blueAccent,\n                    indicatorPadding: EdgeInsets.symmetric(horizontal: 20),\n                    tabs: _tabs\n                        .map((String name) => Tab(\n                              text: name,\n                            ))\n                        .toList(),\n                  ),\n                ),\n              ),\n            ];\n          },\n          body: TabBarView(\n            children: _tabs.map((String name) {\n              return SafeArea(\n                top: false,\n                bottom: false,\n                child: Builder(\n                  builder: (BuildContext context) {\n                    return CustomScrollView(\n                      key: PageStorageKey<String>(name),\n                      slivers: <Widget>[\n                        SliverOverlapInjector(\n                          handle:\n                              NestedScrollView.sliverOverlapAbsorberHandleFor(\n                                  context),\n                        ),\n                        SliverPadding(\n                          padding: const EdgeInsets.all(8.0),\n                          sliver: SliverList(\n                            delegate: SliverChildBuilderDelegate(\n                              (BuildContext context, int index) {\n                                return ListNoteItem0(index);\n                              },\n                              childCount: 50,\n                            ),\n                          ),\n                        ),\n                      ],\n                    );\n                  },\n                ),\n              );\n            }).toList(),\n          ),\n        ),\n      ),\n    );\n  }\n}\n",
+          "isOpen": false
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "name": "Stack",
+      "title": "层叠布局",
+      "desc": "Stack允许子组件堆叠，而Positioned用于根据Stack的四个角来确定子组件的位置。层叠布局和Web中的绝对定位、Android中的Frame布局是相似的，",
+      "lever": 5.0,
+      "segments": [
+        {
+          "id": 0,
+          "name": "Stack",
+          "title": " 基本用法",
+          "explain": " 【children】 : 组件列表   【List<Widget>】 \n 【textDirection】 : 孩子排布方向   【MainAxisAlignment】 \n 【alignment】 : 对齐方式   【AlignmentGeometry】 \n 【overflow】 : 溢出模式   【Overflow】 \n 【fit】 : 适应模式   【StackFit】 \n",
+          "code": "class BaseStackWidget extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) {\n    var yellowBox = Container(\n      color: Colors.yellow,\n      height: 100,\n      width: 100,\n    );\n\n    var redBox = Container(\n      color: Colors.red,\n      height: 90,\n      width: 90,\n    );\n\n    var greenBox = Container(\n      color: Colors.green,\n      height: 80,\n      width: 80,\n    );\n\n    var cyanBox = Container(\n      color: Colors.cyanAccent,\n      height: 70,\n      width: 70,\n    );\n\n    return Container(\n      width: 200,\n      height: 120,\n      color: Colors.grey.withAlpha(33),\n      child: Stack(\n        textDirection: TextDirection.rtl,\n        fit: StackFit.loose,\n        alignment: Alignment.topRight,\n        // overflow: Overflow.clip, // 1.22.0 被去除\n        children: <Widget>[yellowBox, redBox, greenBox, cyanBox],\n      ),\n    );\n  }\n}\n\n",
+          "isOpen": false
+        },
+        {
+          "id": 1,
+          "name": "Stack",
+          "title": " 结合Positioned",
+          "explain": " Positioned组件只能用与Stack中，可以指定左上右下的距离对某个组件进行位置精确安放 \n",
+          "code": "class PositionedStack extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) {\n    var yellowBox = Container(\n      color: Colors.yellow,\n      height: 100,\n      width: 100,\n    );\n\n    var redBox = Container(\n      color: Colors.red,\n      height: 90,\n      width: 90,\n    );\n\n    var greenBox = Container(\n      color: Colors.green,\n      height: 80,\n      width: 80,\n    );\n\n    var cyanBox = Container(\n      color: Colors.cyanAccent,\n      height: 70,\n      width: 70,\n    );\n    return Container(\n        width: 200,\n        height: 120,\n        color: Colors.grey.withAlpha(33),\n        child: Stack(\n          children: <Widget>[yellowBox, redBox, greenBox,\n            Positioned(\n              child: cyanBox,\n              bottom: 10,\n              right: 10,\n            )\n          ],\n        ));\n  }\n}\n",
+          "isOpen": false
+        }
+      ]
+    }
+  ]
+}

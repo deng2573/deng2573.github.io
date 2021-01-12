@@ -1,0 +1,332 @@
+{
+  "widgets": [
+    {
+      "id": 0,
+      "name": "Text",
+      "title": "文字组件",
+      "desc": "用于显示文字的组件。核心样式由TextStyle属性控制",
+      "lever": 5.0,
+      "segments": [
+        {
+          "id": 0,
+          "name": "Text",
+          "title": "基本样式",
+          "explain": "【入参】 :  文字   【String】 \n【maxLines】 :  最大行数   【int】 \n【textAlign】 :  对齐方式   【TextAlign】 \n【overflow】 :  越界效果   【TextOverflow】 \n【style】 :  文字样式   【TextStyle】 \n【color】 :  文字颜色   【Color】 \n【fontSize】 :  文字大小   【double】 \n【fontWeight】 :  文字粗细   【FontWeight】 \n【fontStyle】 :  字体样式   【FontStyle】 \n【letterSpacing】:  字间距   【double】 \n",
+          "code": "class BaseText extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) {\n    return Text(\n      '优路教育|职业教育一站式学习平台,专注工程、医卫、教师、财经等领域培训，'\n      '以一城一校为目标,全国范围内已开设200余家分校,帮助在职人士成就梦想!',\n      maxLines: 3,\n      textAlign: TextAlign.left,\n      overflow: TextOverflow.ellipsis,\n      style: TextStyle(\n        color: Colors.pink,\n        fontSize: 20,\n        fontWeight: FontWeight.bold,\n        fontStyle: FontStyle.italic,\n        letterSpacing: 3,\n      ),\n    );\n  }\n}\n\n",
+          "isOpen": false
+        },
+        {
+          "id": 1,
+          "name": "Text",
+          "title": "文字装饰",
+          "explain": "【decoration】 :   装饰线   【TextDecoration】 \n【decorationThickness】 :   装饰线粗   【double】 \n【decorationStyle】 :   装饰线样式   【TextDecorationStyle】 \n【decorationColor】 :   装饰线颜色   【Color】 \n",
+          "code": "class DecorationText extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) {\n    return Text(\n      'Hello! 优路教育',\n      style: TextStyle(\n        fontSize: 25,\n        fontWeight: FontWeight.bold,\n        decoration: TextDecoration.underline,\n        decorationThickness: 1.5,\n        decorationStyle: TextDecorationStyle.wavy,\n        decorationColor: Colors.purple,\n        letterSpacing: 10,\n      ),\n    );\n  }\n}\n\n",
+          "isOpen": false
+        },
+        {
+          "id": 2,
+          "name": "Text",
+          "title": "文字阴影与背景",
+          "explain": "【backgroundColor】 :   文字背景色   【Color】 \n【shadows】 :   文字阴影   【List<Shadow>】 \n",
+          "code": "class ShadowText extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) {\n    return Text(\n      '好好学习，天天向上',\n      style: TextStyle(\n        fontSize: 35,\n        color: Colors.white,\n        backgroundColor: Colors.cyan.withOpacity(0.3),\n        shadows: [\n          Shadow(\n            color: Colors.blueGrey,\n            offset: Offset(1, 1),\n            blurRadius: 10,\n          ),\n          Shadow(\n            color: Colors.blue,\n            offset: Offset(-0.1, 0.1),\n            blurRadius: 10,\n          ),\n        ],\n      ),\n    );\n  }\n}\n\n",
+          "isOpen": false
+        },
+        {
+          "id": 3,
+          "name": "Text",
+          "title": "使用字体",
+          "explain": " 首先在 pubspec.yaml 中声明 \n【fontFamily】 :   字体名字   【String】 \n",
+          "code": "class FontFamilyText extends StatelessWidget {\n//首先在 pubspec.yaml 中声明\n//  fonts:\n//   - family: Brush\n//      fonts:\n//        - asset: assets/fonts/Brush.ttf\n  @override\n  Widget build(BuildContext context) {\n    return Text(\n      \"Hello! 优路教育\",\n      style: TextStyle(\n        fontSize: 50,\n        color: Colors.orange,\n        fontFamily: 'Brush',\n      ),\n    );\n  }\n}",
+          "isOpen": false
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Image",
+      "title": "图片组件",
+      "desc": "用于图片的展示。可以从文件、内存、网络、资源里加载，并能指定显示的适应方式、样式、颜色混合模式、重复模式等",
+      "lever": 5.0,
+      "segments": [
+        {
+          "id": 0,
+          "name": "Image",
+          "title": "图片加载",
+          "explain": "【Image.asset】  资源图片 \n【Image.network】  网络图片 \n【Image.file】  本地文件图片 \n【Image.memory】  二进制图片 \n【width】 :  图片宽   【double】 \n【height】 :  图片高   【double】 \n",
+          "code": "class LoadImage extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) {\n    return Wrap(\n      spacing: 20,\n      children: <Widget>[\n        Image.asset(\n          'assets/images/basics/basics_image_0.jpg',\n          width: 80,\n          height: 80,\n        ),\n        Image.asset(\n          'assets/images/basics/basics_image_1.gif',\n          width: 80,\n          height: 80,\n        ),\n        Image.network(\n          'https://p3-tt.byteimg.com/origin/pgc-image/5364ce7c7665497f9a9148f7220b43a3?from=pc',\n          height: 80,\n        ),\n        // Image.memory(bytes);\n        // Image.file(file);\n      ],\n    );\n  }\n}\n\n",
+          "isOpen": false
+        },
+        {
+          "id": 1,
+          "name": "Image",
+          "title": "图片适应方式",
+          "explain": "【fit】 :  填充方式  【BoxFit】 \n",
+          "code": "class FitImage extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) {\n    return Wrap(\n      spacing: 10,\n      children: BoxFit.values.map((mode) {\n        return Column(children: <Widget>[\n          Container(\n              width: 100,\n              height: 80,\n              color: Colors.blueAccent.withOpacity(0.5),\n              child: Image.asset(\n                'assets/images/basics/basics_image_0.jpg',\n                fit: mode,\n              )),\n          Padding(\n            padding: const EdgeInsets.only(top: 8, bottom: 8),\n            child: Text(mode.toString().split('.')[1]),\n          )\n        ]);\n      }).toList(),\n    );\n  }\n}\n\n",
+          "isOpen": false
+        },
+        {
+          "id": 2,
+          "name": "Image",
+          "title": "图片颜色及混合模式",
+          "explain": "【color】 :  指定混合颜色  【Color】 \n【colorBlendMode】 :  指定混合模式  【BlendMode】 \n",
+          "code": "class BlendImage extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) {\n    return Wrap(\n      spacing: 20,\n      children: <Widget>[\n        Image.asset(\n          'assets/images/basics/basics_image_0.jpg',\n          width: 80,\n          height: 80,\n          colorBlendMode: BlendMode.clear,\n        ),\n        Image.asset(\n          'assets/images/basics/basics_image_0.jpg',\n          width: 80,\n          height: 80,\n          color: Colors.orangeAccent,\n          colorBlendMode: BlendMode.color,\n        ),\n        Image.asset(\n          'assets/images/basics/basics_image_0.jpg',\n          width: 80,\n          height: 80,\n          color: Colors.green,\n          colorBlendMode: BlendMode.overlay,\n        ),\n        Image.asset(\n          'assets/images/basics/basics_image_0.jpg',\n          height: 80,\n          color: Colors.lightBlueAccent,\n          colorBlendMode: BlendMode.hue,\n        ),\n      ],\n    );\n  }\n}\n\n",
+          "isOpen": false
+        },
+        {
+          "id": 3,
+          "name": "Image",
+          "title": "图片特定区域拉伸",
+          "explain": "【centerSlice】 :  拉伸区域  【Rect】 \n",
+          "code": "class CenterSliceImage extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) {\n    return Stack(\n      alignment: Alignment.center,\n      children: <Widget>[\n        Positioned(\n          top: 0,\n          left: 0,\n          right: 0,\n          bottom: 0,\n          child: Image.asset(\n            'assets/images/basics/basics_chat.png',\n            centerSlice: Rect.fromLTRB(9, 27, 60, 28),\n            color: Colors.blue.shade200,\n            fit: BoxFit.fill,\n          ),\n        ),\n        Padding(\n          padding: const EdgeInsets.all(10.0),\n          child: Text(\n            '优路教育成立于😄2005年 [1]  ，隶属于北京环球优路教育科技股份有限公司，'\n            '是一家专注于工程、医卫、教师、财经领域辅导培训的综合性教育服务机构。'\n            '公司已在全国三十多个城市设立了直营子公司，全国直营分校突破200家。'\n            '以一城一校为目标,全国范围内已开设200余家分校,帮助在职人士成就梦想!'\n            '😄😄',\n            style: TextStyle(\n              fontSize: 15,\n              fontWeight: FontWeight.bold,\n              letterSpacing: 3,\n            ),\n          ),\n        ),\n      ],\n    );\n  }\n}",
+          "isOpen": false
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Button",
+      "title": "按钮组件",
+      "desc": "Flutter提供多种按钮组件。这些组件大多都是直接或间接对RawMaterialButton组件的包装定制，所以他们大多数属性都和RawMaterialButton一样",
+      "lever": 5.0,
+      "segments": [
+        {
+          "id": 0,
+          "name": "Button",
+          "title": "原始按钮",
+          "explain": "【child】 :  子组件   【子组件】 \n【elevation】 :  阴影深度   【Color】 \n【fillColor】 :  填充色   【Color】 \n【splashColor】 :  水波纹颜色   【Color】 \n【textStyle】 :  文字样式   【TextStyle】 \n【padding】 :  内边距   【EdgeInsetsGeometry】 \n【highlightElevation】 :  高亮阴影深度  【double】 \n【shape】 :  形状   【ShapeBorder】 \n【onLongPress】 :  长按事件   【Function】 \n【onPressed】 :  点击事件   【Function】 \n",
+          "code": "class RawMaterialButtonNote extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) {\n    return Container(\n      child: Wrap(\n        spacing: 20,\n        children: <Widget>[\n          RawMaterialButton(\n            elevation: 3,\n            fillColor: Colors.blue,\n            splashColor: Colors.green,\n            shape: CircleBorder(\n                side: BorderSide(\n              width: 3,\n              color: Color(0xFFFFDFDFDF),\n            )),\n            padding: EdgeInsets.all(20),\n            child: Icon(\n              Icons.thumb_up,\n              color: Colors.white,\n            ),\n            onPressed: () {},\n            onLongPress: () {},\n          ),\n          RawMaterialButton(\n            shape: RoundedRectangleBorder(\n              borderRadius: BorderRadius.all(\n                Radius.circular(8),\n              ),\n            ),\n            elevation: 0,\n            highlightElevation: 0,\n            padding: EdgeInsets.symmetric(vertical: 18, horizontal: 10),\n            fillColor: Colors.grey.withAlpha(70),\n            textStyle:\n                TextStyle(color: Colors.black54, fontWeight: FontWeight.bold),\n            onPressed: () {},\n            child: Text('RawMaterialButton'),\n          )\n        ],\n      ),\n    );\n  }\n}\n\n",
+          "isOpen": false
+        },
+        {
+          "id": 1,
+          "name": "Button",
+          "title": "材料按钮",
+          "explain": "【color】 :  背景颜色   【Color】 \n【splashColor】 :  水波纹颜色   【Color】 \n【height】 :  高   【double】 \n【elevation】 :  阴影深度   【Color】 \n【child】 :  子组件   【Widget】 \n【textColor】 :  子组件文字颜色   【Color】 \n【highlightColor】 :  长按高亮色   【Color】 \n【padding】 :  内边距   【EdgeInsetsGeometry】 \n【highlightColor】 :  长按高亮色   【Color】 \n【shape】 :  shape   【shape】 \n【onPressed】 :  点击事件   【Function】 \n【onLongPress】 :  长按事件   【Function】 \n",
+          "code": "class MaterialButtonNote extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) {\n    return MaterialButton(\n      height: 50,\n      elevation: 5,\n      color: Colors.orangeAccent,\n      highlightColor: Color(0xFFF88B0A),\n      textColor: Colors.white,\n      splashColor: Colors.cyanAccent,\n      padding: EdgeInsets.all(8),\n      shape: RoundedRectangleBorder(\n        borderRadius: BorderRadius.all(\n          Radius.circular(10),\n        ),\n      ),\n      child: Text('MaterialButton'),\n      // onPressed不设置或者设置为null时为禁用状态, 设置的样式属性不会生效\n      // onPressed: null,\n      onPressed: () {},\n    );\n  }\n}\n\n",
+          "isOpen": false
+        },
+        {
+          "id": 2,
+          "name": "Button",
+          "title": "无阴影的扁平按钮",
+          "explain": "",
+          "code": "class FlatButtonNote extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) {\n    return FlatButton(\n      onPressed: () {},\n      padding: EdgeInsets.all(8),\n      splashColor: Colors.green,\n      child: Text(\"FlatButton\"),\n      textColor: Colors.white,\n      color: Colors.blue,\n      highlightColor: Colors.red,\n    );\n  }\n}\n\n",
+          "isOpen": false
+        },
+        {
+          "id": 3,
+          "name": "Button",
+          "title": "有阴影的漂浮按钮",
+          "explain": "",
+          "code": "class RaisedButtonNote extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) {\n    return RaisedButton(\n      color: Colors.blue,\n      splashColor: Colors.green,\n      onPressed: () {},\n      child: Text(\"RaisedButton\"),\n      textColor: Colors.white,\n      padding: EdgeInsets.all(8),\n      elevation: 5,\n      highlightColor: Colors.red,\n    );\n  }\n}\n\n",
+          "isOpen": false
+        },
+        {
+          "id": 4,
+          "name": "Button",
+          "title": "边框样式按钮",
+          "explain": "",
+          "code": "class OutlineButtonNote extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) {\n    return OutlineButton(\n      onPressed: () {},\n      child: Text(\"OutlineButton\"),\n      padding: EdgeInsets.all(8),\n      splashColor: Colors.green,\n      highlightColor: Colors.orangeAccent,\n      highlightedBorderColor: Colors.grey,\n      textColor: Colors.black54,\n      borderSide: BorderSide(color: Colors.pinkAccent, width: 2),\n    );\n  }\n}\n\n",
+          "isOpen": false
+        },
+        {
+          "id": 5,
+          "name": "Button",
+          "title": "图标按钮",
+          "explain": "【tooltip】 :  长按提示文字   【String】 \n",
+          "code": "class IconButtonNote extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) {\n    return IconButton(\n      padding: EdgeInsets.all(10),\n      iconSize: 40,\n      onPressed: () {},\n      icon: Icon(Icons.android, color: Colors.brown),\n      tooltip: \"Android\",\n      highlightColor: Colors.orangeAccent,\n      splashColor: Colors.blue,\n    );\n  }\n}\n\n",
+          "isOpen": false
+        },
+        {
+          "id": 6,
+          "name": "Button",
+          "title": "图标文字按钮",
+          "explain": "【icon】 :  图标组件   【Widget】 \n【label】 :  文本组件   【Widget】 \n",
+          "code": "class IconTextButtonNote extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) {\n    return Wrap(\n      spacing: 20,\n      children: <Widget>[\n        RaisedButton.icon(\n          icon: Icon(Icons.send_to_mobile),\n          label: Text('发送'),\n          onPressed: (){},\n        ),\n        OutlineButton.icon(\n          icon: Icon(Icons.add),\n          label: Text('添加'),\n          onPressed: (){},\n        ),\n        FlatButton.icon(\n          icon: Icon(Icons.info),\n          label: Text('详情'),\n          onPressed: (){},\n        ),\n      ],\n    );\n  }\n}\n\n",
+          "isOpen": false
+        },
+        {
+          "id": 7,
+          "name": "Button",
+          "title": "iOS风格的按钮",
+          "explain": "【pressedOpacity】 :  按下时透明度   【Color】 \n【borderRadius】 :  圆角半径   【BorderRadius】 \n",
+          "code": "class CupertinoButtonNote extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) {\n    return CupertinoButton(\n      padding: EdgeInsets.zero,\n      onPressed: () {},\n      color: Colors.pinkAccent,\n      pressedOpacity: 0.8,\n      borderRadius: BorderRadius.all(Radius.circular(5)),\n      child: Text('iOS'),\n    );\n  }\n}",
+          "isOpen": false
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Switch",
+      "title": "开关组件",
+      "desc": "常用于配置的切换，可指定小圆颜色、图片，滑槽颜色等，接收状态变化回调。",
+      "lever": 5.0,
+      "segments": [
+        {
+          "id": 0,
+          "name": "Switch",
+          "title": "习惯用法",
+          "explain": "【value】 : 开关   【bool】 true-开 false-关 \n【activeColor】 :  小圆颜色  【Color】 开关打开时,小圆颜色 \n【inactiveThumbColor】 :  小圆颜色  【Color】 开关关闭时,小圆颜色 \n【activeTrackColor】 :  滑槽颜色  【Color】 开关打开时,滑槽颜色 \n【inactiveTrackColor】 :  滑槽颜色  【Color】 开关关闭时,滑槽颜色 \n【activeThumbImage】 :  小圆图片  【AssetImage】 开关打开时,小圆图片 \n【inactiveThumbImage】 :  小圆图片  【AssetImage】 开关关闭时,小圆图片 \n【onChanged】 : 改变时回调   【Function(bool)】 \n",
+          "code": "class CustomSwitch extends StatefulWidget {\n  @override\n  State<StatefulWidget> createState() => _CustomSwitchState();\n}\n\nclass _CustomSwitchState extends State {\n  bool _value = true;\n\n  @override\n  Widget build(BuildContext context) {\n    return Container(\n      padding: const EdgeInsets.all(30.0),\n      child: Switch(\n        onChanged: (bool value) {\n          setState(() {\n            _value = value;\n          });\n        },\n        value: _value,\n        activeColor: Colors.blue,\n        inactiveThumbColor: Colors.yellow,\n        activeTrackColor: Colors.green,\n        inactiveTrackColor: Colors.red,\n        activeThumbImage: AssetImage('assets/images/home/category_ios.png'),\n        inactiveThumbImage:\n            AssetImage('assets/images/home/category_android.png'),\n      ),\n    );\n  }\n}\n\n",
+          "isOpen": false
+        },
+        {
+          "id": 1,
+          "name": "Switch",
+          "title": " CupertinoSwitch",
+          "explain": "【value】 : 开关   【bool】 \n【activeColor】 :  激活状态颜色  【Color】 \n【activeColor】 :  关闭状态颜色  【Color】 \n【onChanged】 : 改变时回调   【Function(bool)】 \n",
+          "code": "class CustomCupertinoSwitch extends StatefulWidget {\n  @override\n  _CustomCupertinoSwitchState createState() => _CustomCupertinoSwitchState();\n}\n\nclass _CustomCupertinoSwitchState extends State<CustomCupertinoSwitch> {\n  bool _value = false;\n\n  @override\n  Widget build(BuildContext context) {\n    return Container(\n      padding: const EdgeInsets.all(30.0),\n      child: CupertinoSwitch(\n        onChanged: (bool value) {\n          setState(() {\n            _value = value;\n          });\n        },\n        value: _value,\n        activeColor: Colors.blue,\n        trackColor: Colors.pinkAccent,\n      ),\n    );\n  }\n}\n",
+          "isOpen": false
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "ProgressIndicator",
+      "title": "进度组件",
+      "desc": "Material提供了LinearProgressIndicator和CircularProgressIndicator两种进度指示器、iOS指示器CupertinoActivityIndicator",
+      "lever": 5.0,
+      "segments": [
+        {
+          "id": 0,
+          "name": "ProgressIndicator",
+          "title": "线性进度",
+          "explain": "【value】 :  进度   【double】value为null时会不停循环 \n【backgroundColor】 :  背景色   【Color】 \n【valueColor】 :  进度颜色   【Animation<Color>】 \n",
+          "code": "class LinearProgressIndicatorNote extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) {\n    return Container(\n      child: Column(\n        children: [\n          LinearProgressIndicator(\n            value: 0.5,\n            backgroundColor: Colors.blueAccent,\n            valueColor: AlwaysStoppedAnimation(Colors.red),\n          ),\n          SizedBox(\n            height: 20,\n          ),\n          LinearProgressIndicator(\n            value: null,\n            backgroundColor: Colors.blueAccent,\n            valueColor: AlwaysStoppedAnimation(Colors.red),\n          ),\n        ],\n      ),\n    );\n  }\n}\n\n",
+          "isOpen": false
+        },
+        {
+          "id": 1,
+          "name": "ProgressIndicator",
+          "title": "圆形进度",
+          "explain": "【value】 :  进度   【double】value为null时会不停循环 \n【backgroundColor】 :  背景色   【Color】 \n【valueColor】 :  进度颜色   【Animation<Color>】 \n【strokeWidth】:  线宽  【double】 \n",
+          "code": "class CircularProgressIndicatorNote extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) {\n    return Row(\n      mainAxisAlignment: MainAxisAlignment.center,\n      children: [\n        CircularProgressIndicator(\n          value: 0.4,\n          backgroundColor: Colors.black,\n          valueColor: AlwaysStoppedAnimation(Colors.amber),\n          strokeWidth: 4,\n        ),\n        SizedBox(\n          width: 20,\n        ),\n        CircularProgressIndicator(\n          value: null,\n          backgroundColor: Colors.black,\n          valueColor: AlwaysStoppedAnimation(Colors.amber),\n          strokeWidth: 4,\n        ),\n      ],\n    );\n  }\n}\n\n",
+          "isOpen": false
+        },
+        {
+          "id": 2,
+          "name": "ProgressIndicator",
+          "title": "iOS指示器",
+          "explain": "【animating】 :  是否动画   【bool】 \n【radius】 :  半径   【double】 \n",
+          "code": "class CupertinoActivityIndicatorNote extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) {\n    return CupertinoActivityIndicator(\n      animating: true,\n      radius: 20,\n    );\n  }\n}\n\n",
+          "isOpen": false
+        },
+        {
+          "id": 3,
+          "name": "ProgressIndicator",
+          "title": "进度色动画",
+          "explain": "",
+          "code": "class ProgressIndicatorAnimationNote extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) {\n    return ProgressColorAnimation(\n        beginColor: Colors.orangeAccent, endColor: Colors.red);\n  }\n}\n",
+          "isOpen": false
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Slider",
+      "title": "滑动进度条",
+      "desc": "可以在指定的最大值和最小值之间拖动选择。可指定颜色、分段数及显示的标签，接收进度变化回调。",
+      "lever": 5.0,
+      "segments": [
+        {
+          "id": 0,
+          "name": "Slider",
+          "title": "习惯用法",
+          "explain": "【value】 : 数值   【double】 \n【min】 : 最小值   【double】 \n【max】 : 最大值   【double】 \n【activeColor】 : 滑动条已划过部分及滑块颜色   【Color】 \n【inactiveColor】 : 滑动条未划过部分的颜色   【Color】 \n【onChanged】 : 改变时回调   【Function(double)】 \n",
+          "code": "class CustomSlider extends StatefulWidget {\n  @override\n  _CustomSliderState createState() => _CustomSliderState();\n}\n\nclass _CustomSliderState extends State<CustomSlider> {\n  double _value = 0.0;\n\n  @override\n  Widget build(BuildContext context) {\n    return Column(\n      children: [\n        Text('当前值:${_value.toStringAsFixed(1)}'),\n        Slider(\n          value: _value,\n          min: 0.0,\n          max: 100.0,\n          activeColor: Colors.deepOrange,\n          inactiveColor: Colors.green.withAlpha(99),\n          onChanged: (value) {\n            setState(() {\n              _value = value;\n            });\n          },\n        ),\n      ],\n    );\n  }\n}\n\n",
+          "isOpen": false
+        },
+        {
+          "id": 1,
+          "name": "Slider",
+          "title": " 分段标签",
+          "explain": "【value】 : 数值   【double】 \n【divisions】 : 将滑动条几等分   【int】 \n【label】 : \t拖动滑块时可在滑块上方显示的标签   【String】 \n【onChangeStart】 : 开始滑动时监听   【Function(double)】 \n【onChangeEnd】 : 滑动结束时监听   【Function(double)】 \n",
+          "code": "class DivisionsSlider extends StatefulWidget {\n  @override\n  _DivisionsSliderState createState() => _DivisionsSliderState();\n}\n\nclass _DivisionsSliderState extends State<DivisionsSlider> {\n  double _value = 0.0;\n\n  @override\n  Widget build(BuildContext context) {\n    return Slider(\n        value: _value,\n        min: 0.0,\n        max: 100.0,\n        divisions: 10,\n        label: '${_value.toStringAsFixed(1)}',\n        activeColor: Colors.deepOrange,\n        inactiveColor: Colors.green.withAlpha(99),\n        onChangeStart: (value) {\n          print('开始滑动:$value');\n        },\n        onChangeEnd: (value) {\n          print('滑动结束:$value');\n        },\n        onChanged: (value) {\n          setState(() {\n            _value = value;\n          });\n        });\n  }\n}\n\n",
+          "isOpen": false
+        },
+        {
+          "id": 2,
+          "name": "Slider",
+          "title": " CupertinoSlider",
+          "explain": "【thumbColor】 : 滑块的颜色   【Color】 \n",
+          "code": "class CustomCupertinoSlider extends StatefulWidget {\n  @override\n  _CustomCupertinoSliderState createState() => _CustomCupertinoSliderState();\n}\n\nclass _CustomCupertinoSliderState extends State<CustomCupertinoSlider> {\n  double _value = 0.0;\n\n  @override\n  Widget build(BuildContext context) {\n    return Column(\n      mainAxisSize: MainAxisSize.min,\n      crossAxisAlignment: CrossAxisAlignment.stretch,\n      children: [\n        Text('当前值:${_value.toStringAsFixed(1)}'),\n        CupertinoSlider(\n            value: _value,\n            divisions: 10,\n            min: 0.0,\n            max: 100.0,\n            activeColor: Colors.green,\n            thumbColor: Colors.blueAccent,\n            onChangeStart: (value) {\n              print('开始滑动:$value');\n            },\n            onChangeEnd: (value) {\n              print('滑动结束:$value');\n            },\n            onChanged: (value) {\n              setState(() {\n                _value = value;\n              });\n            }),\n      ],\n    );\n  }\n}\n\n",
+          "isOpen": false
+        },
+        {
+          "id": 3,
+          "name": "Slider",
+          "title": " RangeSlider",
+          "explain": "【values】 : 范围值大小   【RangeValues】 \n",
+          "code": "class CustomRangeSlider extends StatefulWidget {\n  @override\n  _CustomRangeSliderState createState() => _CustomRangeSliderState();\n}\n\nclass _CustomRangeSliderState extends State<CustomRangeSlider> {\n  RangeValues _rangeValues = RangeValues(90, 270);\n\n  @override\n  Widget build(BuildContext context) {\n    return RangeSlider(\n        values: _rangeValues,\n        divisions: 180,\n        min: 0.0,\n        max: 360.0,\n        labels: RangeLabels(\"${_rangeValues.start.toStringAsFixed(1)}\",\n            \"${_rangeValues.end.toStringAsFixed(1)}\"),\n        activeColor: Colors.deepOrange,\n        inactiveColor: Colors.green.withAlpha(60),\n        onChangeStart: (value) {\n          print('开始滑动:$value');\n        },\n        onChangeEnd: (value) {\n          print('滑动结束:$value');\n        },\n        onChanged: (value) {\n          setState(() {\n            _rangeValues = value;\n          });\n        });\n  }\n}\n",
+          "isOpen": false
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "TextField",
+      "title": "文本输入组件",
+      "desc": "用于文本输入并提供很多属性。可指定控制器、文字样式、装饰线、行数限制、游标样式等。接收输入变化、完成输入等事件。",
+      "lever": 5.0,
+      "segments": [
+        {
+          "id": 0,
+          "name": "TextField",
+          "title": "默认样式",
+          "explain": "无 \n",
+          "code": "class DefaultTextField extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) {\n    return TextField();\n  }\n}\n\n",
+          "isOpen": false
+        },
+        {
+          "id": 1,
+          "name": "TextField",
+          "title": "提示监听功能",
+          "explain": "【keyboardType】 :  默认输入类型   【TextInputType】 \n【decoration】 :  边框、标签、图标和样式的装饰   【InputDecoration】 \n【onChanged】 :  内容变化监听 \n【autofocus】 :  是否自动获取焦点 \n",
+          "code": "class CustomTextField extends StatelessWidget {\n  void _textFieldChanged(String str) {\n    print(str);\n  }\n\n  @override\n  Widget build(BuildContext context) {\n    return Container(\n        padding: const EdgeInsets.all(30.0),\n        child: TextField(\n          keyboardType: TextInputType.number,\n          decoration: InputDecoration(\n              contentPadding: EdgeInsets.all(10.0),\n              icon: Icon(Icons.text_fields),\n              labelText: '请输入你的姓名)',\n              helperText: '请输入你的真实姓名',\n              border: OutlineInputBorder(\n                borderRadius: BorderRadius.circular(15.0),\n              )),\n          onChanged: _textFieldChanged,\n          autofocus: false,\n        ));\n  }\n}\n\n",
+          "isOpen": false
+        },
+        {
+          "id": 2,
+          "name": "TextField",
+          "title": "输入类型限制",
+          "explain": "【controller】 :  编辑框控制器【TextEditingController】 \n【maxLength】 :  最大内容长度【int】 \n【maxLength】 :  最大长度，设置此项会让TextField右下角有一个输入数量的统计字符串【int】 \n【maxLines】 :  最大行数【int】 \n【autocorrect】 :  是否自动更正【boolean】 \n【autofocus】 : 是否自动获取焦点 【boolean】 \n【obscureText】 : 是否是密码 【boolean】 \n【textAlign】 : 文本对齐方式 【TextAlign】 \n【style】 : 文本样式 【TextStyle】 \n【inputFormatters】 : 允许的输入格式 【FilteringTextInputFormatter】 \n【onChanged】 : 内容改变的回调 【method】 \n【onSubmitted】 : 内容提交(按回车)的回调 【method】 \n【enabled】 : 是否可用 【boolean】 \n",
+          "code": "class TextFieldPage extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) {\n    final controller = TextEditingController();\n    controller.addListener(() {\n      print('input ${controller.text}');\n    });\n    return TextField(\n      controller: controller,\n      maxLength: 30,\n      maxLines: 1,\n      autocorrect: true,\n      autofocus: false,\n      obscureText: true,\n      textAlign: TextAlign.center,\n      style: TextStyle(fontSize: 30.0, color: Colors.blue),\n      inputFormatters: [FilteringTextInputFormatter.digitsOnly],\n      onChanged: (text) {\n        print('change $text');\n      },\n      onSubmitted: (text) {\n        print('submit $text');\n      },\n      enabled: true,\n    );\n  }\n}\n\n",
+          "isOpen": false
+        },
+        {
+          "id": 3,
+          "name": "TextField",
+          "title": " decoration的复杂使用",
+          "explain": "  InputDecoration有非常多的装饰点,对应点缀见代码: \n  border: 边线相关 \n  helper: 左下角相关提示 \n  counter: 右下角相关提示 \n  prefix: 输入框内部最左侧 \n  suffix: 输入框内部最右侧 \n  label: 无焦点时文字 \n  hint: 提示文字相关 \n",
+          "code": "class ComplexTextField extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) {\n    return TextField(\n        decoration: InputDecoration(\n      border: OutlineInputBorder(),\n      focusedBorder: OutlineInputBorder(\n          borderSide: BorderSide(color: Colors.blue),\n          borderRadius:\n              BorderRadius.only(topLeft: Radius.circular(10), bottomLeft: Radius.circular(10))),\n      enabledBorder: OutlineInputBorder(\n          borderSide: BorderSide(color: Colors.deepPurpleAccent),\n          borderRadius:\n              BorderRadius.only(topLeft: Radius.circular(10), bottomLeft: Radius.circular(10))),\n      labelText: 'username',\n      labelStyle: TextStyle(color: Colors.purple),\n      helperText: \"help me\",\n      helperStyle: TextStyle(color: Colors.blue),\n      suffixText: \"suffix\",\n      suffixIcon: Icon(Icons.done),\n      suffixStyle: TextStyle(color: Colors.green),\n      counterText: \"counter\",\n      counterStyle: TextStyle(color: Colors.orange),\n      prefixText: \"ID  \",\n      prefixStyle: TextStyle(color: Colors.blue),\n      prefixIcon: Icon(Icons.language),\n      fillColor: Color(0x110099ee),\n      filled: true,\n      hintText: \"请输入用户名\",\n      hintMaxLines: 1,\n      hintStyle: TextStyle(color: Colors.black38),\n      icon: Icon(Icons.assignment_ind),\n    ));\n  }\n}\n",
+          "isOpen": false
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Transform",
+      "title": "变换控件",
+      "desc": "可以在其子组件绘制时对其应用一些矩阵变换来实现一些特效，注意：该变换是应用在绘制阶段，而并不是应用在布局(layout)阶段",
+      "lever": 5.0,
+      "segments": [
+        {
+          "id": 0,
+          "name": "Transform",
+          "title": "矩阵变换",
+          "explain": "【transform】 : 控制子组件的平移、旋转、缩放、倾斜变换   【Matrix4】 \n【origin】 : 指定子组件做平移、旋转、缩放时的中心点  【Offset】默认左上角为中心 \n【alignment】 : 控制子组件在Transform中的对齐方式   【AlignmentGeometry】 \n【transformHitTests】 : 点击区域是否也做相应的变换,为true时执行相应的变换,为false不执行   【bool】 \n",
+          "code": "class Matrix4Transform extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) {\n    return Row(\n      mainAxisSize: MainAxisSize.max,\n      crossAxisAlignment: CrossAxisAlignment.center,\n      children: [\n        Expanded(\n          child: Container(\n            margin: EdgeInsets.only(top: 20.0, bottom: 20),\n            color: Colors.grey,\n            child: new Transform(\n              alignment: Alignment.topRight, //相对于坐标系原点的对齐方式\n              transform: Matrix4.skew(0.3, 0.2), //沿 X轴倾斜0.2弧度 Y轴倾斜0.3弧度\n              child: new Container(\n                padding: const EdgeInsets.all(8.0),\n                color: Colors.deepOrange,\n                child: const Text('测试变换数据!'),\n              ),\n            ),\n          ),\n        ),\n        Expanded(\n          child: Container(\n            margin: EdgeInsets.only(left: 20),\n            color: Colors.grey,\n            child: new Transform(\n              origin: Offset(20, 20),\n              alignment: Alignment.topRight, //相对于坐标系原点的对齐方式\n              transform: Matrix4.translationValues(5, -10, 0), // 平移\n              child: new Container(\n                padding: const EdgeInsets.all(8.0),\n                color: Colors.deepOrange,\n                child: const Text('测试变换数据!'),\n              ),\n            ),\n          ),\n        ),\n        Expanded(\n          child: Container(\n            margin: EdgeInsets.fromLTRB(20, 0, 0, 0),\n            color: Colors.grey,\n            child: new Transform(\n              origin: Offset(20, 20),\n              alignment: Alignment.topRight, //相对于坐标系原点的对齐方式\n              transform: Matrix4.diagonal3Values(0.9, 0.8, 0), // 缩放\n              child: new Container(\n                padding: const EdgeInsets.all(8.0),\n                color: Colors.deepOrange,\n                child: const Text('测试变换数据!'),\n              ),\n            ),\n          ),\n        ),\n      ],\n    );\n  }\n}\n\n",
+          "isOpen": false
+        },
+        {
+          "id": 1,
+          "name": "Transform",
+          "title": " 扩展",
+          "explain": "",
+          "code": "class OtherTransform extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) {\n    return Row(\n      mainAxisSize: MainAxisSize.max,\n      mainAxisAlignment: MainAxisAlignment.spaceAround,\n      crossAxisAlignment: CrossAxisAlignment.center,\n      children: [\n        // 平移\n        DecoratedBox(\n          decoration:BoxDecoration(color: Colors.red),\n          //默认原点为左上角，左移20像素，向上平移5像素\n          child: Transform.translate(\n            offset: Offset(-10.0, -8.0),\n            child: Text(\"平移测试数据\"),\n          ),\n        ),\n\n        // 旋转\n        DecoratedBox(\n          decoration:BoxDecoration(color: Colors.red),\n          child: Transform.rotate(\n            //旋转60度\n            angle:math.pi/3 ,\n            child: Text(\"旋转测试数据\"),\n          ),\n        ),\n\n        // 缩放\n        DecoratedBox(\n            decoration: BoxDecoration(color: Colors.red),\n            child: Transform.scale(\n                scale: 1.2, //放大到1.2倍\n                child: Text(\"缩放测试数据\")))\n      ],\n    );\n  }\n}\n",
+          "isOpen": false
+        }
+      ]
+    }
+  ]
+}

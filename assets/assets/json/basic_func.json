@@ -1,0 +1,21 @@
+{
+  "widgets": [
+    {
+      "id": 0,
+      "name": "Theme",
+      "title": "主题组件",
+      "desc": "Theme组件可以为Material APP定义主题数据（ThemeData）",
+      "lever": 3.5,
+      "segments": [
+        {
+          "id": 0,
+          "name": "Theme",
+          "title": "基本样式",
+          "explain": "【brightness】 :  深色还是浅色   【Brightness】 \n",
+          "code": "class ThemeNote extends StatelessWidget {\n  @override\n  Widget build(BuildContext context) {\n    return Theme(\n      data: ThemeData(\n        cardTheme: CardTheme(\n          color: Colors.red,\n          elevation: 4,\n        ),\n        dividerTheme: DividerThemeData(\n          color: Colors.blue,\n          thickness: 2,\n        ),\n        sliderTheme: SliderThemeData(\n          thumbColor: Colors.red,\n          activeTrackColor: Colors.green,\n          inactiveTrackColor: Colors.grey,\n        ),\n      ),\n      child: Wrap(\n          crossAxisAlignment: WrapCrossAlignment.center,\n          children: <Widget>[\n            Card(\n              child: Container(\n                width: 50,\n                height: 50,\n                color: Colors.transparent,\n              ),\n            ),\n            Container(\n                width: 150, child: Slider(value: 0.8, onChanged: (v) => {})),\n            Container(\n              width: 150,\n              child: Divider(),\n            )\n          ]),\n    );\n  }\n}\n",
+          "isOpen": false
+        }
+      ]
+    }
+  ]
+}
